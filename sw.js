@@ -1,4 +1,4 @@
-const CACHE_NAME = 'citrine-v1';
+const CACHE_NAME = 'citrine-v3';
 const ASSETS = [
     './',
     './index.html',
