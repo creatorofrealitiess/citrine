@@ -71,32 +71,8 @@
                     </div>
                 </div>
 
-                <div class="alignment-widget">
-                    <div class="alignment-widget-header">
-                        <h3>Today&rsquo;s Alignment</h3>
-                        <span>How natural does Citrine feel?</span>
-                    </div>
-                    <div class="alignment-scale" id="alignmentScale">
-                        <button class="alignment-dot" data-level="1"></button>
-                        <button class="alignment-dot" data-level="2"></button>
-                        <button class="alignment-dot" data-level="3"></button>
-                        <button class="alignment-dot" data-level="4"></button>
-                        <button class="alignment-dot" data-level="5"></button>
-                        <button class="alignment-dot" data-level="6"></button>
-                        <button class="alignment-dot" data-level="7"></button>
-                    </div>
-                    <div class="alignment-labels"><span>drifting</span><span>home</span></div>
-                    <div class="alignment-history" id="alignmentHistory">
-                        <div class="alignment-history-header">
-                            <span class="alignment-history-title">This Week</span>
-                            <button class="alignment-history-toggle" id="alignmentHistoryToggle">show</button>
-                        </div>
-                        <div class="alignment-chart" id="alignmentChart" style="display:none"></div>
-                    </div>
-                </div>
-
                 <div class="feature-grid">
-                    <a class="feature-card" data-page="world"><span class="feature-card-icon">🌏</span><div class="feature-card-title">The World</div><div class="feature-card-desc">Places around the world in Citrine</div></a>
+                    <a class="feature-card" data-page="places"><span class="feature-card-icon">🏙</span><div class="feature-card-title">Places</div><div class="feature-card-desc">Places around the world in Citrine</div></a>
                     <a class="feature-card" data-page="personas" data-accent="rose"><span class="feature-card-icon">🧘🏽‍♀️</span><div class="feature-card-title">Personas</div><div class="feature-card-desc">Who we are in Citrine</div></a>
                     <a class="feature-card" data-page="connections" data-accent="lavender"><span class="feature-card-icon">🔗</span><div class="feature-card-title">Connections</div><div class="feature-card-desc">People in our lives</div></a>
                     <a class="feature-card" data-page="space" data-accent="honey"><span class="feature-card-icon">🎞</span><div class="feature-card-title">Life</div><div class="feature-card-desc">Photo albums of life in Citrine</div></a>
@@ -109,7 +85,90 @@
                 <div class="botanical-accent">&#10086; &#10086; &#10086;</div>
             </div>
 
-            <!-- WORLD -->
+            <!-- PLACES (Locations) -->
+            <div class="page" id="page-places">
+                <div class="section-header">
+                    <button class="back-btn" onclick="placesBack()">&larr;</button>
+                    <h2 id="placesTitle">Places</h2>
+                    <button class="section-action-btn" id="placesNewBtn" onclick="placeNew()">+</button>
+                </div>
+
+                <!-- FILTER TABS -->
+                <div class="connections-filters" id="placesFilters">
+                    <button class="connections-filter active" data-filter="all" onclick="filterPlaces('all')">All</button>
+                    <button class="connections-filter" data-filter="home" onclick="filterPlaces('home')">Home</button>
+                    <button class="connections-filter" data-filter="city" onclick="filterPlaces('city')">City</button>
+                    <button class="connections-filter" data-filter="work" onclick="filterPlaces('work')">Work</button>
+                    <button class="connections-filter" data-filter="daily spots" onclick="filterPlaces('daily spots')">Daily Spots</button>
+                    <button class="connections-filter" data-filter="shop" onclick="filterPlaces('shop')">Shop</button>
+                    <button class="connections-filter" data-filter="special" onclick="filterPlaces('special')">Special</button>
+                </div>
+
+                <div id="placesList" class="personas-list"></div>
+
+                <div id="placeDetail" class="persona-detail" style="display:none">
+                    <div class="detail-hero-image">
+                        <img id="placeDetailHeroImg" src="" style="display:none">
+                        <div id="placeDetailHeroPlaceholder" class="detail-hero-placeholder" style="display:none">
+                            <span id="placeDetailHeroIcon">&#127807;</span>
+                        </div>
+                        <div class="detail-hero-overlay">
+                            <h2 class="detail-hero-name" id="placeDetailName"></h2>
+                            <div id="placeDetailTag" class="connection-tag" style="display:none"></div>
+                        </div>
+                    </div>
+                    <div class="detail-actions-row">
+                        <button class="btn-secondary btn-sm" onclick="placeEdit()">Edit</button>
+                        <button class="btn-danger btn-sm" onclick="placeDelete()">Delete</button>
+                    </div>
+                    <div id="placeDetailFields" class="persona-detail-fields"></div>
+                </div>
+
+                <div id="placeEditor" class="persona-editor" style="display:none">
+                    <div class="world-editor-photo-row">
+                        <div class="world-editor-photo" id="placeEditorPhoto">
+                            <img id="placeEditorPhotoImg" src="" style="display:none">
+                            <span id="placeEditorPhotoIcon">&#127807;</span>
+                        </div>
+                        <div>
+                            <label class="btn-secondary btn-sm" for="placePhotoUpload">Upload Photo</label>
+                            <input type="file" id="placePhotoUpload" accept="image/*" style="display:none">
+                            <div class="anchor-card-meta" style="margin-top:4px">A place in Citrine</div>
+                        </div>
+                    </div>
+                    <input class="auth-input persona-field-input" id="placeEdName" placeholder="Name of this place">
+                    <div class="connection-type-picker">
+                        <span class="connection-type-label">What kind of place?</span>
+                        <div class="connection-type-options" id="placeTypeOptions">
+                            <button class="connection-type-btn" data-type="home" onclick="pickPlaceType('home')">&#127968; Home</button>
+                            <button class="connection-type-btn" data-type="city" onclick="pickPlaceType('city')">&#127750; City</button>
+                            <button class="connection-type-btn" data-type="work" onclick="pickPlaceType('work')">&#128188; Work</button>
+                            <button class="connection-type-btn" data-type="daily spots" onclick="pickPlaceType('daily spots')">&#9749; Daily Spots</button>
+                            <button class="connection-type-btn" data-type="shop" onclick="pickPlaceType('shop')">&#128722; Shop</button>
+                            <button class="connection-type-btn" data-type="special" onclick="pickPlaceType('special')">&#10024; Special</button>
+                        </div>
+                    </div>
+                    <textarea class="auth-input persona-field-input" id="placeEdDescription" placeholder="Describe this place &mdash; what does it look like? What&rsquo;s the feel?" rows="4"></textarea>
+                    <textarea class="auth-input persona-field-input" id="placeEdAtmosphere" placeholder="Atmosphere &mdash; the light, the sounds, the mood when you&rsquo;re here" rows="3"></textarea>
+                    <textarea class="auth-input persona-field-input" id="placeEdSensory" placeholder="Sensory details &mdash; what do you smell, taste, feel on your skin?" rows="3"></textarea>
+                    <textarea class="auth-input persona-field-input" id="placeEdMemories" placeholder="Memories &mdash; what has happened here? What moments live in this place?" rows="3"></textarea>
+                    <textarea class="auth-input persona-field-input" id="placeEdSeasons" placeholder="Seasons &mdash; how does this place change through the year?" rows="3"></textarea>
+                    <textarea class="auth-input persona-field-input" id="placeEdLore" placeholder="Lore &mdash; any history, legends, or secrets about this place?" rows="3"></textarea>
+                    <div class="persona-extras-section">
+                        <div class="persona-extras-header">
+                            <span class="anchor-card-title" style="font-size:16px">Extras</span>
+                            <button class="btn-secondary btn-sm" onclick="placeAddExtra()">+ Field</button>
+                        </div>
+                        <div id="placeExtras" class="persona-extras-list"></div>
+                    </div>
+                    <div class="journal-editor-actions">
+                        <button class="btn-secondary" onclick="placeCancelEdit()">Cancel</button>
+                        <button class="btn-primary btn-sm" onclick="placeSave()">Save Place</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- WORLD (Wiki) -->
             <div class="page" id="page-world">
                 <div class="section-header">
                     <button class="back-btn" onclick="worldBack()">&larr;</button>
@@ -120,74 +179,55 @@
                 <!-- FILTER TABS -->
                 <div class="connections-filters" id="worldFilters">
                     <button class="connections-filter active" data-filter="all" onclick="filterWorld('all')">All</button>
-                    <button class="connections-filter" data-filter="home" onclick="filterWorld('home')">Home</button>
-                    <button class="connections-filter" data-filter="city" onclick="filterWorld('city')">City</button>
-                    <button class="connections-filter" data-filter="work" onclick="filterWorld('work')">Work</button>
-                    <button class="connections-filter" data-filter="daily spots" onclick="filterWorld('daily spots')">Daily Spots</button>
-                    <button class="connections-filter" data-filter="shop" onclick="filterWorld('shop')">Shop</button>
-                    <button class="connections-filter" data-filter="special" onclick="filterWorld('special')">Special</button>
+                    <button class="connections-filter" data-filter="history" onclick="filterWorld('history')">History</button>
+                    <button class="connections-filter" data-filter="culture" onclick="filterWorld('culture')">Culture</button>
+                    <button class="connections-filter" data-filter="people" onclick="filterWorld('people')">People</button>
+                    <button class="connections-filter" data-filter="rules" onclick="filterWorld('rules')">Rules &amp; Laws</button>
+                    <button class="connections-filter" data-filter="technology" onclick="filterWorld('technology')">Technology</button>
+                    <button class="connections-filter" data-filter="nature" onclick="filterWorld('nature')">Nature</button>
                 </div>
 
-                <div id="worldList" class="personas-list"></div>
+                <!-- LIST VIEW -->
+                <div id="worldList" class="wiki-list"></div>
 
-                <div id="worldDetail" class="persona-detail" style="display:none">
-                    <div class="detail-hero-image">
-                        <img id="worldDetailHeroImg" src="" style="display:none">
-                        <div id="worldDetailHeroPlaceholder" class="detail-hero-placeholder" style="display:none">
-                            <span id="worldDetailHeroIcon">&#127807;</span>
-                        </div>
-                        <div class="detail-hero-overlay">
-                            <h2 class="detail-hero-name" id="worldDetailName"></h2>
-                            <div id="worldDetailTag" class="connection-tag" style="display:none"></div>
-                        </div>
+                <!-- DETAIL VIEW (wiki page) -->
+                <div id="worldDetail" class="wiki-detail" style="display:none">
+                    <div class="wiki-detail-header">
+                        <h2 class="wiki-detail-title" id="worldDetailName"></h2>
+                        <div id="worldDetailTag" class="wiki-tag" style="display:none"></div>
                     </div>
                     <div class="detail-actions-row">
                         <button class="btn-secondary btn-sm" onclick="worldEdit()">Edit</button>
                         <button class="btn-danger btn-sm" onclick="worldDelete()">Delete</button>
                     </div>
-                    <div id="worldDetailFields" class="persona-detail-fields"></div>
+                    <div id="worldDetailFields" class="wiki-detail-sections"></div>
                 </div>
 
+                <!-- EDITOR -->
                 <div id="worldEditor" class="persona-editor" style="display:none">
-                    <div class="world-editor-photo-row">
-                        <div class="world-editor-photo" id="worldEditorPhoto">
-                            <img id="worldEditorPhotoImg" src="" style="display:none">
-                            <span id="worldEditorPhotoIcon">&#127807;</span>
-                        </div>
-                        <div>
-                            <label class="btn-secondary btn-sm" for="worldPhotoUpload">Upload Photo</label>
-                            <input type="file" id="worldPhotoUpload" accept="image/*" style="display:none">
-                            <div class="anchor-card-meta" style="margin-top:4px">A place in Citrine</div>
-                        </div>
-                    </div>
-                    <input class="auth-input persona-field-input" id="worldEdName" placeholder="Name of this place">
+                    <input class="auth-input persona-field-input" id="worldEdName" placeholder="Title of this entry">
                     <div class="connection-type-picker">
-                        <span class="connection-type-label">What kind of place?</span>
+                        <span class="connection-type-label">Category</span>
                         <div class="connection-type-options" id="worldTypeOptions">
-                            <button class="connection-type-btn" data-type="home" onclick="pickWorldType('home')">&#127968; Home</button>
-                            <button class="connection-type-btn" data-type="city" onclick="pickWorldType('city')">&#127750; City</button>
-                            <button class="connection-type-btn" data-type="work" onclick="pickWorldType('work')">&#128188; Work</button>
-                            <button class="connection-type-btn" data-type="daily spots" onclick="pickWorldType('daily spots')">&#9749; Daily Spots</button>
-                            <button class="connection-type-btn" data-type="shop" onclick="pickWorldType('shop')">&#128722; Shop</button>
-                            <button class="connection-type-btn" data-type="special" onclick="pickWorldType('special')">&#10024; Special</button>
+                            <button class="connection-type-btn" data-type="history" onclick="pickWorldType('history')">&#128220; History</button>
+                            <button class="connection-type-btn" data-type="culture" onclick="pickWorldType('culture')">&#127917; Culture</button>
+                            <button class="connection-type-btn" data-type="people" onclick="pickWorldType('people')">&#129489; People</button>
+                            <button class="connection-type-btn" data-type="rules" onclick="pickWorldType('rules')">&#9878; Rules &amp; Laws</button>
+                            <button class="connection-type-btn" data-type="technology" onclick="pickWorldType('technology')">&#9881; Technology</button>
+                            <button class="connection-type-btn" data-type="nature" onclick="pickWorldType('nature')">&#127793; Nature</button>
                         </div>
                     </div>
-                    <textarea class="auth-input persona-field-input" id="worldEdDescription" placeholder="Describe this place &mdash; what does it look like? What&rsquo;s the feel?" rows="4"></textarea>
-                    <textarea class="auth-input persona-field-input" id="worldEdAtmosphere" placeholder="Atmosphere &mdash; the light, the sounds, the mood when you&rsquo;re here" rows="3"></textarea>
-                    <textarea class="auth-input persona-field-input" id="worldEdSensory" placeholder="Sensory details &mdash; what do you smell, taste, feel on your skin?" rows="3"></textarea>
-                    <textarea class="auth-input persona-field-input" id="worldEdMemories" placeholder="Memories &mdash; what has happened here? What moments live in this place?" rows="3"></textarea>
-                    <textarea class="auth-input persona-field-input" id="worldEdSeasons" placeholder="Seasons &mdash; how does this place change through the year?" rows="3"></textarea>
-                    <textarea class="auth-input persona-field-input" id="worldEdLore" placeholder="Lore &mdash; any history, legends, or secrets about this place?" rows="3"></textarea>
+                    <textarea class="auth-input persona-field-input" id="worldEdOverview" placeholder="Overview &mdash; a summary of this topic" rows="5"></textarea>
                     <div class="persona-extras-section">
                         <div class="persona-extras-header">
-                            <span class="anchor-card-title" style="font-size:16px">Extras</span>
-                            <button class="btn-secondary btn-sm" onclick="worldAddExtra()">+ Field</button>
+                            <span class="anchor-card-title" style="font-size:16px">Sections</span>
+                            <button class="btn-secondary btn-sm" onclick="worldAddExtra()">+ Section</button>
                         </div>
                         <div id="worldExtras" class="persona-extras-list"></div>
                     </div>
                     <div class="journal-editor-actions">
                         <button class="btn-secondary" onclick="worldCancelEdit()">Cancel</button>
-                        <button class="btn-primary btn-sm" onclick="worldSave()">Save Place</button>
+                        <button class="btn-primary btn-sm" onclick="worldSave()">Save Entry</button>
                     </div>
                 </div>
             </div>
@@ -796,7 +836,7 @@ You are already there."></textarea>
             <button class="nav-item active" data-nav="home"><span class="nav-icon">🏠</span><span class="nav-label">Home</span></button>
             <button class="nav-item" data-nav="journal"><span class="nav-icon">🔖</span><span class="nav-label">Journal</span></button>
             <button class="nav-item" data-nav="messenger"><span class="nav-icon">&#128172;</span><span class="nav-label">Messages</span></button>
-            <button class="nav-item" data-nav="gallery"><span class="nav-icon">🎬</span><span class="nav-label">Scenes</span></button>
+            <button class="nav-item" data-nav="world"><span class="nav-icon">🌍</span><span class="nav-label">World</span></button>
             <button class="nav-item" data-nav="settings"><span class="nav-icon">⚙️</span><span class="nav-label">Settings</span></button> 
         </nav>
     </div>

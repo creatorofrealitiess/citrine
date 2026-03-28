@@ -5,8 +5,8 @@
 
 :root {
     /* Golden Amber Base — like looking through citrine */
-    --bg-deep: #c89830;
-    --bg-main: #dab040;
+    --bg-deep: #c49428;
+    --bg-main: #d4a838;
     --bg-card: rgba(245, 225, 170, 0.88);
     --bg-elevated: rgba(240, 215, 150, 0.9);
     --bg-surface: rgba(235, 210, 145, 0.75);
@@ -70,7 +70,7 @@
 }
 
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-html { height: 100%; overflow: hidden; background: #dab040; }
+html { height: 100%; overflow: hidden; background: #d4a838; }
 
 body {
     font-family: var(--font-body);
@@ -1437,7 +1437,7 @@ body::after {
     color: var(--honey);
 }
 
-/* ═══════ WORLD / LOCATIONS ═══════ */
+/* ═══════ PLACES / LOCATIONS ═══════ */
 
 .world-editor-photo-row {
     display: flex; align-items: center; gap: var(--space-md); margin-bottom: var(--space-lg);
@@ -1451,6 +1451,83 @@ body::after {
 
 .world-editor-photo img { width: 100%; height: 100%; object-fit: cover; }
 .world-editor-photo span { font-size: 24px; }
+
+/* ═══════ WORLD / WIKI ═══════ */
+
+.wiki-list { display: flex; flex-direction: column; gap: var(--space-sm); }
+
+.wiki-entry-card {
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    padding: var(--space-md) var(--space-lg);
+    border: var(--border-subtle);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.wiki-entry-card:hover {
+    box-shadow: var(--shadow-soft);
+    border-color: rgba(184, 134, 11, 0.3);
+}
+
+.wiki-entry-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-xs);
+    flex-wrap: wrap;
+}
+
+.wiki-entry-title {
+    font-family: var(--font-display);
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.wiki-entry-tag {
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.wiki-entry-preview {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.5;
+    margin-bottom: var(--space-xs);
+}
+
+.wiki-entry-meta {
+    font-size: 11px;
+    color: var(--text-faint);
+}
+
+.wiki-detail { }
+
+.wiki-detail-header {
+    margin-bottom: var(--space-md);
+}
+
+.wiki-detail-title {
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: var(--space-xs);
+}
+
+.wiki-tag {
+    font-size: 12px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-weight: 500;
+    display: inline-block;
+}
+
+.wiki-detail-sections { }
 
 /* ═══════ OUR SPACE — PHOTO GALLERY ═══════ */
 .space-albums-grid {
