@@ -20,6 +20,80 @@ let currentUser = null;
 let currentUserName = '';
 let currentUserAvatar = '';
 
+// Early declarations for Places & World (needed before init)
+var placesData = [];
+var placesUnsub = null;
+var editingPlaceId = null;
+var placeEditorExtras = [];
+var placePhotoFile = null;
+var placePhotoPreview = '';
+var placeSelectedType = '';
+var placesFilter = 'all';
+var worldData = [];
+var worldUnsub = null;
+var editingWorldId = null;
+var worldEditorExtras = [];
+var worldSelectedType = '';
+var worldFilter = 'all';
+
+// Early declarations for all other sections
+var affirmations = [];
+var currentAffIdx = 0;
+var affirmationsUnsub = null;
+var alignmentData = {};
+var journalEntries = [];
+var editingJournalId = null;
+var journalUnsub = null;
+var messengerUnsub = null;
+var userDataCache = {};
+var msgMenuTarget = null;
+var msgMenuText = '';
+var editingMsgId = null;
+var personasData = [];
+var personasUnsub = null;
+var editingPersonaId = null;
+var personaEditorExtras = [];
+var personaPhotoFile = null;
+var personaPhotoPreview = '';
+var connectionsData = [];
+var connectionsUnsub = null;
+var editingConnectionId = null;
+var connectionEditorExtras = [];
+var connectionPhotoFile = null;
+var connectionPhotoPreview = '';
+var connectionSelectedType = '';
+var connectionsFilter = 'all';
+var anchorsData = { playlists: [], palettes: [], scents: [] };
+var anchorsUnsub = null;
+var paletteBuilderColours = [];
+var selectedSenseType = 'smell';
+var spaceAlbums = [];
+var spacePhotos = [];
+var spaceAlbumsUnsub = null;
+var spacePhotosUnsub = null;
+var currentAlbumId = null;
+var currentPhotoId = null;
+var spaceGenController = null;
+var spaceGeneratedImageData = null;
+var spaceRefImages = [];
+var savedPrompts = [];
+var savedPromptsUnsub = null;
+var albumScrollPos = 0;
+var lbScale = 1;
+var lbPosX = 0;
+var lbPosY = 0;
+var scenesData = [];
+var scenesUnsub = null;
+var editingSceneId = null;
+var scenePhotoFile = null;
+var scenePhotoPreview = '';
+var sceneSelectedMood = '';
+var timelineData = [];
+var timelineUnsub = null;
+var editingTimelineId = null;
+var timelineSelectedCat = '';
+var miniPlayerActive = false;
+
 // ═══════ AUTHENTICATION ═══════
 
 let isSignUp = false;
@@ -380,9 +454,6 @@ const defaultAffirmations = [
     "This is not imagination. This is memory \u2014 I am simply remembering what is.",
 ];
 
-let affirmations = [...defaultAffirmations];
-let currentAffIdx = 0;
-let affirmationsUnsub = null;
 
 function initAffirmations() {
     const ref = db.collection('shared').doc('affirmations');
@@ -456,7 +527,6 @@ function renderAffList() {
 
 // ═══════ ALIGNMENT TRACKER (Firestore synced) ═══════
 
-let alignmentData = {};
 
 function initAlignmentTracker() {
     const today = new Date().toISOString().split('T')[0];
@@ -564,9 +634,6 @@ function renderAlignmentChart() {
 
 // ═══════ JOURNAL (Firestore synced) ═══════
 
-let journalEntries = [];
-let editingJournalId = null;
-let journalUnsub = null;
 
 function initJournal() {
     if (journalUnsub) journalUnsub();
@@ -663,8 +730,6 @@ async function journalDelete() {
 
 // ═══════ MESSENGER (Firestore real-time) ═══════
 
-let messengerUnsub = null;
-let userDataCache = {};
 
 async function loadUserData() {
     const snapshot = await db.collection('users').get();
@@ -765,8 +830,6 @@ function initMessenger() {
     });
 }
 
-let msgMenuTarget = null;
-let msgMenuText = '';
 
 function hideMsgMenu() {
     document.getElementById('msgContextMenu').classList.remove('visible');
@@ -791,7 +854,6 @@ function msgDelete() {
     }
 }
 
-let editingMsgId = null;
 
 async function sendMessage() {
     const input = document.getElementById('messengerInput');
@@ -817,12 +879,6 @@ document.getElementById('messengerInput').addEventListener('keypress', (e) => { 
 
 // ═══════ PERSONAS (Firestore synced) ═══════
 
-let personasData = [];
-let personasUnsub = null;
-let editingPersonaId = null;
-let personaEditorExtras = [];
-let personaPhotoFile = null;
-let personaPhotoPreview = '';
 
 function initPersonas() {
     if (personasUnsub) personasUnsub();
@@ -1103,14 +1159,6 @@ async function personaDelete() {
 
 // ═══════ CONNECTIONS (Firestore synced) ═══════
 
-let connectionsData = [];
-let connectionsUnsub = null;
-let editingConnectionId = null;
-let connectionEditorExtras = [];
-let connectionPhotoFile = null;
-let connectionPhotoPreview = '';
-let connectionSelectedType = '';
-let connectionsFilter = 'all';
 
 function initConnections() {
     if (connectionsUnsub) connectionsUnsub();
@@ -1434,9 +1482,6 @@ async function connectionDelete() {
 
 // ═══════ SENSORY ANCHORS (Firestore synced) ═══════
 
-let anchorsData = { playlists: [], palettes: [], scents: [] };
-let anchorsUnsub = null;
-let paletteBuilderColours = [];
 
 function initAnchors() {
     const ref = db.collection('shared').doc('anchors');
@@ -1614,7 +1659,6 @@ function copyColour(hex) {
 }
 
 // ── Senses ──
-let selectedSenseType = 'smell';
 
 const senseEmojis = { smell: '👃', sound: '👂', touch: '🤲', taste: '👅', sight: '👁' };
 
@@ -1667,15 +1711,6 @@ function renderScents() {
 }
 
 // ═══════ PLACES / LOCATIONS (Firestore synced) ═══════
-
-let placesData = [];
-let placesUnsub = null;
-let editingPlaceId = null;
-let placeEditorExtras = [];
-let placePhotoFile = null;
-let placePhotoPreview = '';
-let placeSelectedType = '';
-let placesFilter = 'all';
 
 const placeTypeIcons = {
     home: '\u{1F3E0}', city: '\u{1F306}', work: '\u{1F4BC}',
@@ -1906,13 +1941,6 @@ async function placeDelete() {
 
 // ═══════ WORLD / WIKI (Firestore synced) ═══════
 
-let worldData = [];
-let worldUnsub = null;
-let editingWorldId = null;
-let worldEditorExtras = [];
-let worldSelectedType = '';
-let worldFilter = 'all';
-
 const worldCatIcons = {
     history: '\u{1F4DC}', culture: '\u{1F3AD}', people: '\u{1F9D1}',
     rules: '\u2696', technology: '\u2699', nature: '\u{1F331}'
@@ -2112,15 +2140,6 @@ async function worldDelete() {
 // ═══════ OUR SPACE — Album-Based Photo Gallery ═══════
 
 const DEFAULT_ALBUMS = ['Us', 'Pets', 'Home', 'World'];
-let spaceAlbums = [];
-let spacePhotos = [];
-let spaceAlbumsUnsub = null;
-let spacePhotosUnsub = null;
-let currentAlbumId = null;
-let currentPhotoId = null;
-let spaceGenController = null;
-let spaceGeneratedImageData = null;
-let spaceRefImages = []; // Array of { data: base64, mimeType: string }
 
 document.getElementById('genRefUpload').addEventListener('change', (e) => {
     const files = Array.from(e.target.files);
@@ -2226,8 +2245,6 @@ function removeRefImage(index) {
 }
 
 // ── Saved Prompts ──
-let savedPrompts = []; // { id, name, prompt, refImages: [{ url, mimeType, storagePath }] }
-let savedPromptsUnsub = null;
 
 function initSavedPrompts() {
     if (savedPromptsUnsub) savedPromptsUnsub();
@@ -2560,7 +2577,6 @@ function renderSpacePhotoGrid() {
 }
 
 // ── Photo Detail ──
-let albumScrollPos = 0; // Preserve scroll when viewing a photo
 
 function updatePhotoNav() {
     const photos = spacePhotos.filter(p => p.albumId === currentAlbumId);
@@ -2610,9 +2626,6 @@ function spaceOpenPhoto(photoId) {
 }
 
 // ── Photo Lightbox ──
-let lbScale = 1;
-let lbPosX = 0;
-let lbPosY = 0;
 
 // Swipe navigation in photo detail view
 (function initPhotoDetailSwipe() {
@@ -3363,12 +3376,6 @@ async function spaceSaveGenerated() {
 
 // ═══════ SCENE BUILDER (Firestore synced) ═══════
 
-let scenesData = [];
-let scenesUnsub = null;
-let editingSceneId = null;
-let scenePhotoFile = null;
-let scenePhotoPreview = '';
-let sceneSelectedMood = '';
 
 function initScenes() {
     if (scenesUnsub) scenesUnsub();
@@ -3589,10 +3596,6 @@ async function sceneDelete() {
 
 // ═══════ TIMELINE (Firestore synced) ═══════
 
-let timelineData = [];
-let timelineUnsub = null;
-let editingTimelineId = null;
-let timelineSelectedCat = '';
 
 function initTimeline() {
     if (timelineUnsub) timelineUnsub();
@@ -3745,7 +3748,6 @@ async function timelineDelete() {
 
 // ═══════ PERSISTENT MINI PLAYER ═══════
 
-let miniPlayerActive = false;
 
 function playInMiniPlayer(id, name, type) {
     const player = document.getElementById('miniPlayer');

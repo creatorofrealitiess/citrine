@@ -952,7 +952,7 @@ body::after {
 
 /* ═══════ BOTTOM NAV ═══════ */
 .bottom-nav {
-    flex-shrink: 0; background: var(--bg-deep);
+    flex-shrink: 0; background: var(--bg-elevated);
     border-top: var(--border-subtle);
     padding: var(--space-sm) var(--space-md) calc(var(--space-sm) + var(--safe-bottom));
     display: flex; justify-content: space-around; align-items: center;
