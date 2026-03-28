@@ -4,40 +4,40 @@
    ═══════════════════════════════════════════ */
 
 :root {
-    /* Golden Light Base */
-    --bg-deep: #f5e6c8;
-    --bg-main: #faf3e4;
-    --bg-card: rgba(255, 255, 255, 0.65);
-    --bg-elevated: rgba(255, 248, 235, 0.8);
-    --bg-surface: rgba(245, 230, 200, 0.6);
+    /* Golden Amber Base — like looking through citrine */
+    --bg-deep: #d4a840;
+    --bg-main: #e8c868;
+    --bg-card: rgba(210, 170, 60, 0.35);
+    --bg-elevated: rgba(220, 180, 80, 0.45);
+    --bg-surface: rgba(200, 155, 50, 0.3);
 
     /* Citrine Crystal Palette */
-    --citrine-deep: #4a3508;
-    --citrine-dark: #7a5a10;
-    --citrine-primary: #b8860b;
-    --citrine-medium: #c9a030;
-    --citrine-light: #daa520;
-    --citrine-pale: #e8c550;
-    --citrine-mist: #f0dca0;
-    --citrine-whisper: #f8edc8;
+    --citrine-deep: #3a2505;
+    --citrine-dark: #5c3d0a;
+    --citrine-primary: #8b6914;
+    --citrine-medium: #a07818;
+    --citrine-light: #c9a030;
+    --citrine-pale: #ddb840;
+    --citrine-mist: #e8cc70;
+    --citrine-whisper: #f0dca0;
 
-    /* Text */
-    --text-primary: #3a2808;
-    --text-secondary: #6b4f1a;
-    --text-muted: #8c7030;
-    --text-faint: #b8a070;
+    /* Text — warm browns for readability on gold */
+    --text-primary: #2e1a00;
+    --text-secondary: #5c3d0a;
+    --text-muted: #7a5a1a;
+    --text-faint: #a08040;
 
     /* Accents */
-    --cream: rgba(255, 252, 245, 0.7);
-    --cream-dark: #f0e4c8;
-    --parchment: rgba(245, 230, 200, 0.6);
-    --honey: #c9940a;
-    --honey-light: #daa520;
-    --rose: #c06040;
-    --rose-light: #d88060;
-    --lavender: #6a8870;
-    --lavender-light: #88a890;
-    --sky: #b8860b;
+    --cream: rgba(240, 210, 130, 0.4);
+    --cream-dark: #d4a840;
+    --parchment: rgba(210, 170, 60, 0.35);
+    --honey: #a07010;
+    --honey-light: #c49020;
+    --rose: #b85030;
+    --rose-light: #d07050;
+    --lavender: #5a7860;
+    --lavender-light: #788e78;
+    --sky: #8b6914;
 
     /* Typography */
     --font-display: 'Libre Caslon Display', Georgia, serif;
@@ -57,11 +57,11 @@
     --radius-md: 10px;
     --radius-lg: 14px;
     --radius-xl: 20px;
-    --shadow-soft: 0 2px 12px rgba(120, 80, 10, 0.1);
-    --shadow-medium: 0 4px 20px rgba(120, 80, 10, 0.15);
-    --shadow-lifted: 0 8px 32px rgba(120, 80, 10, 0.2);
-    --border-subtle: 1px solid rgba(184, 134, 11, 0.15);
-    --border-medium: 1px solid rgba(184, 134, 11, 0.25);
+    --shadow-soft: 0 2px 12px rgba(80, 50, 0, 0.15);
+    --shadow-medium: 0 4px 20px rgba(80, 50, 0, 0.2);
+    --shadow-lifted: 0 8px 32px rgba(80, 50, 0, 0.25);
+    --border-subtle: 1px solid rgba(120, 80, 10, 0.2);
+    --border-medium: 1px solid rgba(120, 80, 10, 0.35);
 
     /* Layout */
     --safe-top: env(safe-area-inset-top, 0px);
@@ -70,7 +70,7 @@
 }
 
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-html { height: 100%; overflow: hidden; background: #f5e6c8; }
+html { height: 100%; overflow: hidden; background: #e8c868; }
 
 body {
     font-family: var(--font-body);
@@ -88,10 +88,10 @@ body::before {
     position: fixed;
     inset: 0;
     background: url('citrine-texture.png') center/cover no-repeat;
-    opacity: 0.15;
+    opacity: 0.25;
     pointer-events: none;
     z-index: 0;
-    filter: brightness(1.1) saturate(0.9);
+    filter: brightness(0.9) saturate(1.2);
 }
 
 body::after {
@@ -121,8 +121,8 @@ body::after {
     position: absolute;
     inset: 0;
     background: url('citrine-texture.png') center/cover no-repeat;
-    opacity: 0.15;
-    filter: brightness(1.1) saturate(0.9);
+    opacity: 0.25;
+    filter: brightness(0.9) saturate(1.2);
 }
 
 .auth-container {
