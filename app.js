@@ -338,7 +338,7 @@ document.getElementById('avatarUpload').addEventListener('change', async (e) => 
 // ═══════ NAVIGATION ═══════
 
 const subtitles = {
-    home: 'you are here now', places: 'places in citrine', world: 'the world you've built', personas: 'who we are in citrine',
+    home: 'you are here now', places: 'places in citrine', world: "the world you've built", personas: 'who we are in citrine',
     connections: 'your people', space: 'memories & moments', journal: 'write from within',
     messenger: 'conversations in citrine', gallery: 'memories & moments', timeline: 'the story so far',
     anchors: 'pull yourself in', settings: 'configuration'
