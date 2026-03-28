@@ -1684,7 +1684,7 @@ const worldTypeColours = {
     home: { bg: 'rgba(201, 164, 90, 0.15)', color: 'var(--honey)' },
     city: { bg: 'rgba(106, 150, 176, 0.15)', color: 'var(--sky)' },
     work: { bg: 'rgba(155, 138, 184, 0.15)', color: 'var(--lavender)' },
-    'daily spots': { bg: 'rgba(90, 158, 122, 0.15)', color: 'var(--citrine-primary)' },
+    'daily spots': { bg: 'rgba(218, 165, 32, 0.15)', color: 'var(--citrine-primary)' },
     shop: { bg: 'rgba(201, 164, 90, 0.15)', color: 'var(--honey)' },
     special: { bg: 'rgba(201, 134, 126, 0.15)', color: 'var(--rose)' }
 };
