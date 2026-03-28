@@ -411,7 +411,7 @@ document.getElementById('avatarUpload').addEventListener('change', async (e) => 
 
 // ═══════ NAVIGATION ═══════
 
-const subtitles = {
+var subtitles = {
     home: 'you are here now', places: 'places in citrine', world: "the world you've built", personas: 'who we are in citrine',
     connections: 'your people', space: 'memories & moments', journal: 'write from within',
     messenger: 'conversations in citrine', gallery: 'memories & moments', timeline: 'the story so far',
@@ -445,7 +445,7 @@ document.querySelectorAll('.nav-item[data-nav]').forEach(n => n.addEventListener
 
 // ═══════ AFFIRMATIONS (Firestore synced) ═══════
 
-const defaultAffirmations = [
+var defaultAffirmations = [
     "I don't hope for Citrine. I don't wish for it. I live it \u2014 it is simply where I am.",
     "The city hums quietly outside. I can feel the morning light on the terrace.",
     "Assumption is the bridge. I have already crossed it.",
@@ -1660,7 +1660,7 @@ function copyColour(hex) {
 
 // ── Senses ──
 
-const senseEmojis = { smell: '👃', sound: '👂', touch: '🤲', taste: '👅', sight: '👁' };
+var senseEmojis = { smell: '👃', sound: '👂', touch: '🤲', taste: '👅', sight: '👁' };
 
 function selectSenseType(btn) {
     document.querySelectorAll('.sense-type-btn').forEach(b => b.classList.remove('active'));
@@ -1712,12 +1712,12 @@ function renderScents() {
 
 // ═══════ PLACES / LOCATIONS (Firestore synced) ═══════
 
-const placeTypeIcons = {
+var placeTypeIcons = {
     home: '\u{1F3E0}', city: '\u{1F306}', work: '\u{1F4BC}',
     'daily spots': '\u{2615}', shop: '\u{1F6D2}', special: '\u2728'
 };
 
-const placeTypeColours = {
+var placeTypeColours = {
     home: { bg: 'rgba(160, 112, 16, 0.15)', color: 'var(--honey)' },
     city: { bg: 'rgba(139, 105, 20, 0.15)', color: 'var(--sky)' },
     work: { bg: 'rgba(90, 120, 96, 0.15)', color: 'var(--lavender)' },
@@ -1941,17 +1941,17 @@ async function placeDelete() {
 
 // ═══════ WORLD / WIKI (Firestore synced) ═══════
 
-const worldCatIcons = {
+var worldCatIcons = {
     history: '\u{1F4DC}', culture: '\u{1F3AD}', people: '\u{1F9D1}',
     rules: '\u2696', technology: '\u2699', nature: '\u{1F331}'
 };
 
-const worldCatLabels = {
+var worldCatLabels = {
     history: 'History', culture: 'Culture', people: 'People',
     rules: 'Rules & Laws', technology: 'Technology', nature: 'Nature'
 };
 
-const worldCatColours = {
+var worldCatColours = {
     history: { bg: 'rgba(160, 112, 16, 0.15)', color: 'var(--honey)' },
     culture: { bg: 'rgba(184, 80, 48, 0.15)', color: 'var(--rose)' },
     people: { bg: 'rgba(139, 105, 20, 0.15)', color: 'var(--citrine-primary)' },
@@ -2139,7 +2139,7 @@ async function worldDelete() {
 
 // ═══════ OUR SPACE — Album-Based Photo Gallery ═══════
 
-const DEFAULT_ALBUMS = ['Us', 'Pets', 'Home', 'World'];
+var DEFAULT_ALBUMS = ['Us', 'Pets', 'Home', 'World'];
 
 document.getElementById('genRefUpload').addEventListener('change', (e) => {
     const files = Array.from(e.target.files);
@@ -3406,7 +3406,7 @@ function renderSceneList() {
     }).join('');
 }
 
-const moodMap = {
+var moodMap = {
     serene: '\u{1F33F} Serene',
     golden: '\u2600\uFE0F Golden',
     cosy: '\u{1F56F}\uFE0F Cosy',
@@ -3605,7 +3605,7 @@ function initTimeline() {
     });
 }
 
-const catMap = {
+var catMap = {
     milestone: '\u2728 Milestone',
     everyday: '\u{1F33F} Everyday',
     love: '\u{1F49B} Love',
